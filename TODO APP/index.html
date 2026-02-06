@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>TODO app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="heading" style="text-align: center"><h2>TODO App</h2></div>
+    <div class="container">
+      <div class="task-items">
+        <input type="text" placeholder="Enter your task" id="task" />
+        <input type="date" id="date" />
+        <button onclick="inputInsert()" id="insert">Insert</button>
+        <div class="display-task"></div>
+      </div>
+    </div>
+
+    <script>
+      let todoList = [];
+      todoList = JSON.parse(localStorage.getItem("todoList")) || [];
+
+      let inputDate = document.querySelector("#date");
+      let inputTask = document.querySelector("#task");
+      let inputDisplay = document.querySelector(".display-task");
+
+      displaytask();
+
+      function inputInsert() {
+        todoList = JSON.parse(localStorage.getItem("todoList")) || [];
+        const newTask = {
+          id: crypto.randomUUID(),
+          item: inputTask.value,
+          dueDate: inputDate.value,
+        };
+        todoList.push(newTask);
+        console.log(todoList);
+        localStorage.setItem("todoList", JSON.stringify(todoList));
+
+        displaytask();
+      }
+
+      function displaytask() {
+        let newHtml = "";
+        for (let i = 0; i < todoList.length; i++) {
+          let { item, dueDate } = todoList[i];
+
+          newHtml += `   
+               <span>${item}</span>
+               <span>${dueDate}</span>
+               <button  id="delete" onclick="deleteTask(${i})" >Delete</button>
+            `;
+        }
+        inputDisplay.innerHTML = newHtml;
+        inputTask.value = "";
+        inputDate.value = "";
+      }
+      function deleteTask(index) {
+        todoList.splice(index, 1);
+        localStorage.setItem("todoList", JSON.stringify(todoList));
+        displaytask();
+      }
+    </script>
+  </body>
+</html>
