@@ -7,7 +7,7 @@ body{
 .container{
   width: 80%;
   align-items: center;
-  margin-left: 22%;
+  margin-left: 32%;
 }
 
 .task-items, .display-task{
@@ -46,3 +46,4 @@ body{
   font-size: 105%;
 
 }
+
