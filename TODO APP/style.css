@@ -4,6 +4,12 @@ body{
   padding: 0;
 }
 
+.container{
+  width: 80%;
+  align-items: center;
+  margin-left: 22%;
+}
+
 .task-items, .display-task{
   display: grid;
   grid-template-columns: 200px 150px 100px;
@@ -38,4 +44,5 @@ body{
 #insert:hover, #delete:hover{
   background-color: pink;
   font-size: 105%;
+
 }
